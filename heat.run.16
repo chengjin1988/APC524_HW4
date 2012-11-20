@@ -1,0 +1,18 @@
+#!/bin/bash
+#PBS -V
+#PBS -l nodes=2:ppn=8,walltime=40:00:00
+#PBS -q eac
+#PBS -r n
+#PBS -j oe
+#PBS -M chengjin8841@gmail.com
+#PBS -m a
+
+module load openmpi
+cd //scratch/lustre/jincheng/APC524/HW4/submit
+
+
+for nx in 128 256 512 1024
+do
+   mpiexec --mca btl ^openib ./heat_mpi $nx > heat_mpi.$nx.16.out
+done
+
